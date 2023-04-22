@@ -1,0 +1,81 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ysabeau">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora">
+    <link rel="stylesheet" href="{% static 'quiz.css' %}">
+    <script src="{% static 'timer.js' %}"></script>
+    <title>Quiz | TechManthan</title>
+</head>
+<body style="background-image:url({% static 'bg-signup.jpg'%})">
+    <script type = "text/javascript" >  
+        function preventBack() { window.history.forward(); }  
+        setTimeout("preventBack()", 0);  
+        window.onunload = function () { null };
+        
+    </script>
+
+
+    <div class="container mt-5">
+        <div class="d-flex justify-content-center row">
+            <div class="col-md-10 col-lg-10" >
+                <div class="border" >
+                    <div class="question bg-dark p-3 border-bottom">
+                        <div class="d-flex flex-row justify-content-between align-items-center mcq">
+                            
+                            {% if score >= 0 %}
+                            <h3 style="color:red;font-family:Ysabeau;" class="bg-dark" >Thank you for participating.Best of luck.</h3>
+                            <h3 style="color:burlywood;font-family:Ysabeau;">Your score:</h3> <h4 h3 style="color:burlywood;font-family:Lora;">{{score}}</h4><br>
+                            {% else %}
+                            <h4 style="color:white">BATTLE OF BRAINS</h4>
+                            <h4 style="color:white"><p class="time" id="demo"></p></h4>
+                            {% endif %}
+                            
+                        </div>
+                    </div>
+                <form action="/quiz" method="post">
+                    {% csrf_token %}
+                    {% for q in questions %}
+                    <input type="hidden" class="" id="hidetime" name="timer">
+                    <div class="question bg-white p-3 ">
+                        
+                        <div class="d-flex flex-row align-items-center question-title">
+                            <h3 class="text-danger">Q{{q.no}}.</h3>
+                            <h5 class="mt-1 ml-2">{{q.qsn}}</h5>
+                        </div>
+                        <div class="ans ml2">
+  <input type="radio" id="html" name="q{{q.no}}" value="{{q.o1}}" required>
+  <label for="html">{{q.o1}}</label><br>
+  <input type="radio" id="css" name="q{{q.no}}" value="{{q.o2}}" required>
+  <label for="css">{{q.o2}}</label><br>
+  <input type="radio" id="javascript" name="q{{q.no}}" value="{{q.o3}}" required>
+  <label for="javascript">{{q.o3}}</label><br>
+  <input type="radio" id="javascript" name="q{{q.no}}" value="{{q.o4}}" required>
+  <label for="javascript">{{q.o4}}</label> 
+
+</div>  
+<hr>
+</div>
+
+{% endfor %}
+{% if s == 1 %}
+  
+
+<div class="d-flex flex-row justify-content-between align-items-center p-3 bg-white"><button class="btn btn-primary border-success align-items-center btn-success" type="submit" onclick="preventBack()">Submit<i class="fa fa-angle-right ml-2"></i></button></div>
+                </div>
+                {% endif %}
+            
+        </div>
+
+</form>
+</div>
+</body>
+</html>

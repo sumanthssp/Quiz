@@ -1,0 +1,78 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Score | Tech-Manthan</title>
+</head>
+<body >
+  <style>
+    .styled-table {
+      border-collapse: collapse;
+      margin: 25px 0;
+      font-size: 0.9em;
+      font-family: sans-serif;
+      min-width: 100%;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);}
+
+      .styled-table thead tr {
+        background-color: #009879;
+        color: #ffffff;
+        text-align: center;
+    }
+    
+    .styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+}
+
+.styled-table tbody tr {
+  border-bottom: thin solid #dddddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}
+
+.styled-table tbody tr:last-of-type {
+  border-bottom: 2px solid #009879;
+}
+
+.styled-table tbody tr.active-row {
+  font-weight: bold;
+  color: #009879;
+}
+
+  
+  </style>
+    
+    <table class="styled-table">
+        <thead>
+          <tr>
+            
+            <th scope="col">Team Name</th>
+            <th scope="col">Member1</th>
+            <th scope="col">Member 2</th>
+            <th scope="col">Score</th>
+            <th scope="col">Time</th>
+          </tr>
+        </thead>
+        {% for t in teams  %}
+        <tbody >
+          <tr>
+            <th>{{t.tname}}</th>
+            <th>{{t.m1}}</th>
+            <th>{{t.m2}}</th>
+            <th>{{t.score}}</th>
+            <th>{{t.time}}</th>
+          </tr>
+
+        </tbody>
+        {% endfor %}
+      </table>
+    
+</body>
+</html>
